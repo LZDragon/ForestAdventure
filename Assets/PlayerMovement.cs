@@ -56,8 +56,9 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.magnitude > 0)
         {
             speed = 5f;
-
-            Vector3 movementAmount = (moveInput * (speed * Time.deltaTime)) + new Vector3(0, gravity);
+            Vector3 offsetMoveDirection =
+                Vector3.RotateTowards(moveInput, playerCamera.transform.forward, 2 * Mathf.PI, 0);
+            Vector3 movementAmount = (offsetMoveDirection * (speed * Time.deltaTime)) + new Vector3(0, gravity);
             playerController.Move(movementAmount);
         }
         else
