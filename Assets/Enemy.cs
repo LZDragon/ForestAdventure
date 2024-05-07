@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     public void ReceiveHit(float damage)
     {
         healthComponent.TakeDamage(damage);
+        enemyAnimator.SetTrigger("Hit");
         Reaction();
     }
 
