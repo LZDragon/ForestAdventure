@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(HealthComponent))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] protected Player player;
     [SerializeField] private float detectPlayerDistance = 5f;
 
     [SerializeField] HealthComponent healthComponent;

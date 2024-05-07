@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(HealthComponent))]
 public class Player : MonoBehaviour
@@ -10,7 +11,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerHealthComponent.HandleOnKilled += OnKilled;
+        playerHealthComponent.HandleHealthUpdated += OnHealthUpdated;
     }
 
     public void Attack()
@@ -28,6 +30,11 @@ public class Player : MonoBehaviour
 
     void OnKilled()
     {
-        
+        SceneManager.LoadScene(5);//GameOver
+    }
+
+    public void TakeDamage(float damage)
+    {
+        playerHealthComponent.TakeDamage(damage);
     }
 }

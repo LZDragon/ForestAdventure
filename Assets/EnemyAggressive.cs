@@ -44,6 +44,7 @@ public class EnemyAggressive : Enemy
     {
         
         enemyAnimator.SetTrigger("IsAttacking");
+        player.TakeDamage(Random.Range(20f,30f));
     }
 
 
