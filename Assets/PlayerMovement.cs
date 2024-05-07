@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController playerController;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private Player playerComponent;
     private Vector3 moveInput;
     private Vector3 lookInput;
     private float xmouseSensitivity = 2f;
@@ -56,9 +58,34 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.magnitude > 0)
         {
             speed = 5f;
-            Vector3 offsetMoveDirection =
-                Vector3.RotateTowards(moveInput, playerCamera.transform.forward, 2 * Mathf.PI, 0);
-            Vector3 movementAmount = (offsetMoveDirection * (speed * Time.deltaTime)) + new Vector3(0, gravity);
+            Vector3 offsetMoveDirection = new Vector3();
+            if (moveInput.x > 0)
+            {
+                //Debug.Log("D key is pressed");
+                offsetMoveDirection = playerCamera.transform.right;
+            }
+
+            else if (moveInput.x < 0)
+            {
+                offsetMoveDirection = -playerCamera.transform.right;
+                //Debug.Log("A key is pressed");
+            }
+
+            if (moveInput.z > 0)
+            {
+                offsetMoveDirection = playerCamera.transform.forward;
+                //Debug.Log("W key is pressed");
+                
+            }
+            else if(moveInput.z < 0)
+            {
+                offsetMoveDirection = -playerCamera.transform.forward;
+                //Debug.Log("S key is pressed");
+            }
+            
+            Vector3 movementAmount = (offsetMoveDirection.normalized * (speed * Time.deltaTime)) + new Vector3(0, gravity);
+            
+            RotatePlayerModel();
             playerController.Move(movementAmount);
         }
         else
@@ -95,7 +122,13 @@ public class PlayerMovement : MonoBehaviour
     {
         playerAnimator.SetTrigger("Attack");
         isAttacking = false;
+        playerComponent.Attack();
 
+    }
+
+    void RotatePlayerModel()
+    {
+        playerModel.transform.eulerAngles = new Vector3(0, playerCamera.transform.eulerAngles.y, 0);
     }
 
 

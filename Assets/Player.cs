@@ -20,4 +20,14 @@ public class Player : MonoBehaviour
             hitInfo.transform.GetComponent<Enemy>().ReceiveHit(Random.Range(30f,50f));
         }
     }
+
+    void OnHealthUpdated(float updatedHealth)
+    {
+        
+    }
+
+    void OnKilled()
+    {
+        
+    }
 }
