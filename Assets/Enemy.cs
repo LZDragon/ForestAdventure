@@ -10,10 +10,15 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] protected Animator enemyAnimator;
+    
+    protected static int HitHash = Animator.StringToHash("Hit");
+    protected static int IsAttackingHash = Animator.StringToHash("IsAttacking");
+    protected static int DiedHash = Animator.StringToHash("HasDied");
 
+    [SerializeField]
     protected bool isAlive = true;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         healthComponent.HandleOnKilled += OnKilled;
         healthComponent.HandleHealthUpdated += OnHealthUpdate;
@@ -35,31 +40,34 @@ public class Enemy : MonoBehaviour
         return false;
     }
 
-    public void ReceiveHit(float damage)
+    public virtual void ReceiveHit(float damage)
     {
+        if (isAlive)
+        {
+            Debug.Log($"AttackHit! Health - {healthComponent.Health}");
+        }
         healthComponent.TakeDamage(damage);
-        enemyAnimator.SetTrigger("Hit");
+        enemyAnimator.SetTrigger(HitHash);
         Reaction();
     }
 
-    void Reaction()
+    public virtual void Reaction()
     {
         
     }
 
-    void OnKilled()
+    public virtual void OnKilled()
     {
-        if (enemyAnimator)
-        {
-            enemyAnimator.SetBool("Died", true);
-        }
+        enemyAnimator.ResetTrigger(IsAttackingHash);
+        enemyAnimator.SetBool(DiedHash, true);
+        
 
         isAlive = false;
     }
 
     void OnHealthUpdate(float updatedHealth)
     {
-        
+        Debug.Log(updatedHealth);
     }
 
 

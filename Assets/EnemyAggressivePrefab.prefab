@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3996541048273540650}
   - component: {fileID: 1394186174904921625}
   - component: {fileID: 8828673886974653603}
+  - component: {fileID: 4264670992828632756}
   m_Layer: 7
   m_Name: EnemyAggressivePrefab
   m_TagString: Untagged
@@ -109,10 +110,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  detectPlayerDistance: 1
+  detectPlayerDistance: 2
   healthComponent: {fileID: 3256904696415415326}
   enemyAnimator: {fileID: 8096502828056014047}
   aimConstraint: {fileID: 1394186174904921625}
+--- !u!136 &4264670992828632756
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878436067769123578}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.46, z: 0}
 --- !u!1001 &4828461517795179103
 PrefabInstance:
   m_ObjectHideFlags: 0

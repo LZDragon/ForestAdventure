@@ -21,9 +21,13 @@ public class Player : MonoBehaviour
 
     public void Attack()
     {
-        if (Physics.SphereCast(transform.position,5f, playerModel.transform.forward, out RaycastHit hitInfo, 5f, 1 << 7))
+        Vector3 attackPositionOffset = new Vector3(0, 1, 0);
+        Debug.DrawRay(transform.position+attackPositionOffset,playerModel.transform.forward,Color.red,5f);
+        
+        if (Physics.SphereCast(transform.position,5f, playerModel.transform.forward, out RaycastHit hitInfo, 10f, 1 << 7))
         {
             hitInfo.transform.GetComponent<Enemy>().ReceiveHit(Random.Range(30f,50f));
+            
         }
     }
 

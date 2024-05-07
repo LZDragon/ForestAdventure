@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Animations;
 
 public class EnemyAggressive : Enemy
 {
     [SerializeField] private AimConstraint aimConstraint;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,15 +38,14 @@ public class EnemyAggressive : Enemy
             }
             yield return new WaitForSeconds(3f);
         }
-
+        Debug.Log("Blegh");
     }
 
     void Attack()
     {
         
-        enemyAnimator.SetTrigger("IsAttacking");
+        enemyAnimator.SetTrigger(IsAttackingHash);
         player.TakeDamage(Random.Range(20f,30f));
     }
-
 
 }
